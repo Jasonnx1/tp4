@@ -41,13 +41,14 @@ namespace WeatherApp.ViewModels
         public bool CanGetTemp(string obj)
         {
             return TemperatureService != null;
+            
         }
 
         public void GetTemp(string obj)
         {
             if (TemperatureService == null) throw new NullReferenceException();
 
-            _ = GetTempAsync();
+            Task.Run(() => GetTempAsync());
         }
 
         private async Task GetTempAsync()

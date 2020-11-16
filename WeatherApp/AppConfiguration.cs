@@ -12,15 +12,24 @@ namespace WeatherApp
 
 
 
-        public static String GetValue(String key)
+        public static string GetValue(string key)
         {
 
-            return key;
+            if(configuration == null)
+            {
+                initConfig();
+            }
+
+            string value = configuration[key];
+            return value;
         }
 
         private static void initConfig()
         {
-
+            var builder = new ConfigurationBuilder();
+            builder.AddJsonFile("appsettings.json", optional: true, reloadOnChange: true);
+            builder.AddUserSecrets<MainWindow>();
+            configuration = builder.Build();
         }
 
     }

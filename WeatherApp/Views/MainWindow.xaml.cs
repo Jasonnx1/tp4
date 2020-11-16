@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using Microsoft.Extensions.Configuration;
+using System.Windows;
+using WeatherApp.Services;
 using WeatherApp.ViewModels;
 
 namespace WeatherApp
@@ -18,7 +20,14 @@ namespace WeatherApp
 
             vm = new TemperatureViewModel();
 
-            DataContext = vm;           
+            DataContext = vm;
+
+            vm.SetTemperatureService(new OpenWeatherService(AppConfiguration.GetValue("APIKey")));
         }
+
+
+  
+
+ 
     }
 }
